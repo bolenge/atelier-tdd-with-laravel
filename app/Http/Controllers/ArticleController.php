@@ -9,6 +9,12 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        return response()->send(['ccc']);
+        $articles = Article::all();
+
+        if (!$articles->count()) {
+            return response()->json(null, 204);
+        }
+
+        return response()->json($articles, 200);
     }
 }
