@@ -27,4 +27,18 @@ class ArticleControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonCount(1);
     }
+
+    public function testCanStoreAnArticle()
+    {
+        $this->withoutExceptionHandling();
+
+        $inputs  = [
+            'title' => $this->faker->title(),
+            'body' => $this->faker->text(),
+        ];
+
+        $response = $this->post('/api/articles', $inputs);
+
+        $response->assertStatus(201);
+    }
 }
